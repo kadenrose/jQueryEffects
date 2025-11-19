@@ -1,0 +1,380 @@
+:root{
+  --red: #bf3636;
+  --orange: #d04936;
+  --yellow: #ffcc14;
+  --green: #5a5a23;
+  --blue: #303464;
+  --pink: #fe4b7a;
+  --purple: #741a60;
+  --brown: #40130e;
+  --light-gray: #eaeaea;
+  --med-gray: #555;
+  --dark-gray: #222;
+	--white: #fff;
+	
+	--background: #555;
+	--text: #eee;
+}
+
+body{
+  background-color: var(--light-gray);
+  font-family: Raleway, sans-serif;
+  line-height: 1.3;
+  color: var(--dark-gray);
+}
+
+header, main, section, footer{
+  display: block;
+  width: calc(100% - 3rem);
+  max-width: 1000px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: -5px 5px 5px #aaa;
+	border: 1px solid var(--light-gray);
+}
+
+/* Hidden content for screen reader users - code from: https://webaim.org/techniques/css/invisiblecontent/ */
+.sr-only {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+main section{
+	margin: 0 auto;
+  	width: calc(100% - 2rem);
+}
+
+main > section{
+	margin: 2rem auto;
+}
+
+h1, h2, h3, h4{
+  font-weight: bold;
+	text-align: center;
+}
+
+h1{
+  font-size: 2rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 3px solid var(--light-gray);
+}
+
+h2{
+	font-size: 1.75rem;
+	flex-basis: 100%;
+	padding-bottom: 0.75rem;
+	border-bottom: 3px solid var(--light-gray);
+}
+
+h3{
+	font-size: 1.5rem;
+	margin: 1rem 0;
+}
+
+h4{
+	font-size: 1.35rem;
+	margin: 1rem 0;
+}
+
+main{
+/* 	display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem; */
+}
+
+p{
+  padding: 1rem; 
+  font-size: 1.1rem;
+	max-width: 65ch;
+	margin: 0 auto;
+}
+
+img{
+	display: block;
+	margin: 1rem auto
+}
+
+code{
+	display: block;
+	font-family: monospace;
+	padding: 1rem;
+	background-color: var(--light-gray);
+	width: fit-content;
+	max-width: calc(100% - 2rem);
+	overflow: scroll;
+	margin: 0 auto;
+}
+
+.subsec{
+	border: none;
+	box-shadow: none;
+	width: 100%;
+	padding: 0;
+}
+
+.message{
+  display: none;
+  color: var(--orange);
+  font-size: 1.2em;
+  margin: 0.25em 0;
+  font-weight: bold;
+}
+
+.error{
+  font-size: 1em;
+  display: block;
+}
+
+.errorInput{
+  border: 1px solid var(--orange);
+}
+
+.hidden{
+	display: none;
+}
+
+.code{
+	font-family: monospace;
+}
+
+form{
+	width: 90%;
+	max-width: 300px;
+	margin: 0 auto 2rem auto;
+	font-size: 1.1rem;
+}
+
+input{
+  display: block;
+  margin: 0.25em auto;
+  font-family: Raleway, sans-serif;
+}
+
+input, select{
+	margin: 0 auto 1rem auto;
+	font-size: 1rem;
+	font-family: Raleway, sans-serif;
+}
+
+input:focus, input:focus-within, input:focus-visible, button:focus, button:focus-within, button:focus-visible{
+	outline: 2px solid var(--orange);
+}
+
+input, textarea, select{
+  display: block;
+  width: calc(100% - 1.5em);
+  padding: 0.5em;
+  border: 1px solid var(--light-gray);
+  border-radius: 0;
+  outline: none;
+  box-shadow: -5px 5px 5px #aaa;
+	font-size: 1.1rem;
+}
+
+label{
+  display: inline-block;
+  margin: 01em 0 0 0;
+  font-size: 1.1rem;
+}
+
+fieldset{
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	gap: 0.5rem;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+fieldset label{
+	margin: 0;
+}
+
+button, input[type=submit]{
+  display: block;
+  margin: 1rem auto;
+  background-color: var(--blue);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 0.75em;
+  font-family: Raleway, sans-serif;
+  font-size: 1em;
+  box-shadow: -6px 6px 10px var(--med-gray);
+	height: auto;
+}
+
+a, a:visited{
+	color: var(--blue);
+}
+
+ul{
+	padding-left: 2rem;
+	list-style-type: disc;
+}
+
+ol{
+	padding-left: 2rem;
+	list-style-type: decimal;
+}
+
+dl.threeCols{
+	padding-left: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+dl.threeCols.all-widths{
+		display: grid;
+		padding-left: 0;
+		grid-template-columns: 1fr 2fr 3fr;
+	}
+
+dt{
+	font-weight: bold;
+	text-align: right;
+}
+
+dd.full{
+	flex-basis: 100%;
+	text-align: center;
+}
+
+li{
+	padding: 0.25rem 0;
+}
+
+strong{
+	font-weight: bold;
+}
+
+span{
+	color: var(--red);
+}
+
+#effectDiv{
+	min-height: 210px;
+}
+
+#outerDiv{
+	margin: 2rem 1rem;
+	min-height: 150px;
+}
+
+#queue{
+	width: 75px;
+	height: 75px;
+	position: relative;
+	left: 0px;
+	top: 30px;
+	background: var(--purple);
+	display: none;
+	padding: 0;
+	margin: 0;
+}
+
+#animatedImage{
+	min-height: 275px;
+}
+
+#animatedImage img{
+	width: 200px;
+	margin: 1rem auto 2rem auto;
+}
+
+.hide{
+	visibility: hidden;
+}
+
+#examples, #create{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+#examples section, #create section{
+	max-width: 350px;
+}
+
+#section6 img, #section8 img{
+	border: 5px solid var(--dark-gray);
+	position: relative;
+}
+
+/* ----- MODAL STYLES ----- */
+#modal.hidden{
+	display: none;
+}
+
+#modal{
+	display: flex;
+  align-items: center;
+  justify-content: center;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+
+#inner-modal{
+	background-color: var(--white);
+	width: 90%;
+	max-width: 450px;
+}
+
+#objectDisplay{
+	width: fit-content;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#objectDisplay strong{
+	font-size: 1.3rem;
+}
+
+footer{
+	text-align: center;
+}
+
+footer span{
+	color: var(--dark-gray);
+}
+
+
+/* add hover styles on devices that support hover styles */
+@media (hover: hover){
+	nav a:hover, button:hover, input[type=submit]:hover{
+		box-shadow: -3px 3px 6px var(--med-gray);
+		color: var(--white);
+	}
+	
+	a:hover{
+		color: var(--orange);
+	}
+}
+
+@media screen and (min-width: 625px){
+	dl{
+		display: block;
+	}
+	
+	dl.threeCols{
+		display: grid;
+		padding-left: 0;
+		grid-template-columns: 1fr 2fr 3fr;
+	}	
+	
+	dd.full{
+		flex-basis: auto;
+		text-align: left;
+	}
+}
