@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+	<h1>Module 5 JavaScript Practice - jQuery Events, Styles, &amp; Animation</h1>
+	<p>The output for this activity will be visible on the page.</p>
+</header>
+
+<main>
+	<section id="effects">
+		<h2>jQuery Effects</h2>
+		<p>jQuery has three sets of animation methods for showing and hiding web page elements. The animation methods alter various CSS properties of selected elements to produce animations. The methods take a speed argument that determines the duration of the animation. jQuery animation methods are also called <strong>jQuery effects</strong>.</p>
+			
+		<section class="subsec">
+			<h3>Animation Methods</h3>
+			<dl class="threeCols">
+				<dt class="code">show()<br>hide()<br>toggle()</dt>
+				<div>
+					<dd class="code">$("h1").show("slow");</dd>
+					<dd class="code">$("h1").hide("slow");</dd>
+					<dd class="code">$("h1").toggle("slow");</dd>
+				</div>
+				<dd class="full">Alters width, height, and opacity all at once</dd>
+
+				<dt class="code">fadeIn()<br>fadeOut()<br>fadeToggle()</dt>
+				<div>
+					<dd class="code">$("h1").fadeIn("normal");</dd>
+					<dd class="code">$("h1").fadeOut("normal");</dd>
+					<dd class="code">$("h1").fadeToggle("normal");</dd>
+				</div>
+				<dd class="full">Alters opacity only</dd>
+
+				<dt class="code">slideDown()<br>slideUp()<br>slideToggle()</dt>
+				<div>
+					<dd class="code">$("h1").slideDown("fast");</dd>
+					<dd class="code">$("h1").slideUp("fast");</dd>
+					<dd class="code">$("h1").slideToggle("fast");</dd>
+				</div>
+				<dd class="full">Alters height only</dd>
+			</dl>
+		</section>
+			
+		<section class="subsec">
+			<h3>The Speed Argument for Animation Methods</h3>
+			<dl class="all-widths threeCols">
+				<dt class="code">"slow"</dt>
+				<dd class="code">$("p").show("slow");</dd>
+				<dd>0.6 seconds to show the paragraph</dd>
+
+				<dt class="code">"normal"</dt>
+				<dd class="code">$("p").show("normal");</dd>
+				<dd>0.4 seconds to show the paragraph</dd>
+
+				<dt class="code">"fast"</dt>
+				<dd class="code">$("p").show("fast");</dd>
+				<dd>0.2 seconds to show the paragraph</dd>
+
+				<dt class="code">milliseconds</dt>
+				<dd class="code">$("p").show(1500);</dd>
+				<dd>1.5 seconds to show the paragraph</dd>
+			</dl>
+			<section class="subsec" id="effectParent">
+				<h4>Effects Practice</h4>
+				<div id="effectDiv">
+					<img src="https://assets.codepen.io/1351055/well-done.png" alt="well done happy face" width="200" height="200" id="effectImg">
+				</div>
+				<form>
+					<label for="effect">Choose an Effect:</label>
+					<select name="effect" id="effect">
+						<option value="show">show</option>
+						<option value="hide">hide</option>
+						<option value="toggle">show/hide toggle</option>
+						<option value="fadeIn">fadeIn</option>
+						<option value="fadeOut">fadeOut</option>
+						<option value="fadeToggle">fadeToggle</option>
+						<option value="slideDown">slideDown</option>
+						<option value="slideUp">slideUp</option>
+						<option value="slideToggle">slideToggle</option>
+					</select>
+					<label for="speed">Choose a Speed:</label>
+					<select name="speed" id="speed">
+						<option value="slow">slow (0.6 seconds)</option>
+						<option value="normal">normal (0.4 seconds)</option>
+						<option value="fast">fast (0.2 seconds)</option>
+					</select>
+					<input type="submit" name="effectSubmit" id="effectSubmit" value="Show Me Some Effects!">
+				</form>
+			</section>
+	</section>
+		
+		<section class="subsec">
+			<h3>Add Effects to a Modal</h3>
+			<p>There is a hidden modal on this page and we are going to use jQuery Effects to create a cleaner transition between opening and closing.</p>
+			<button id="open-modal">Open the Modal</button>
+			<div id="modal" class="hidden">
+				<div id="inner-modal">
+					<button>X</button>
+					<p>This could be an important message. It isn't, but it could be. You can dismiss this to see the effect again.</p>
+				</div>
+			</div>
+		</section>
+			
+	</section>
+		
+	<section id="animationOrder">
+		<h2>Controlling Animation Order</h2>
+		<p>Sometimes developers want to perform an operation after an effect completes. Ex: Display a "Thank you" message after the user has typed information into a form that gradually disappears. However, code that is written after a call to an animation method will execute before the animation is complete. To execute code after the animation is complete, the jQuery animation methods can be passed a callback function.</p>
+		<pre>
+			<code>
+<!-- 				 -->// these animations would happen at the same time
+<!-- 				 -->$("h1").fadeOut("slow"); 
+<!-- 				 -->$("h2").fadeOut("slow");
+
+<!-- 				 -->// 
+<!-- 				 -->$("h1").fadeIn("slow", function() {
+<!-- 				 -->  $("h2").fadeIn("slow");
+<!-- 				 -->});
+			</code>
+		</pre>
+		<p>jQuery queues animations applied to the same element so that each animation finishes before the next begins.</p>
+		<pre>
+			<code>
+<!-- 				 -->// Animations on the same element are queued
+<!-- 				 -->$("h1").fadeIn("slow");
+<!-- 				 -->$("h1").slideUp(1000);
+			</code>
+		</pre>
+		<p>Non-animation method calls are not placed in the animation queue.</p>
+		<pre>
+			<code>
+<!-- 				 -->$("h1").hide("slow")
+<!-- 				 -->// Called immediately, not waiting for hide to complete
+<!-- 				 -->   .addClass("important")
+<!-- 				 -->// Begins after hide completes
+<!-- 				 -->   .slideDown(1000);
+			</code>
+		</pre>
+		<p>jQuery provides a <strong>queue()</strong> method to aid in queuing code that should be executed after the previous animations complete. The queue() method can take the place of the callback function used with the animation methods. The queue() method takes a function argument that is passed a function parameter called next. The next function must be called so the next animation in the queue can be processed. Good practice is to use the queue() method instead of callback functions when developing elaborate animations. Using many nested callback functions can lead to overly complicated code.</p>
+		<pre>
+			<code>
+<!-- 				 -->$("h1").hide("slow")
+<!-- 				 -->   .queue(function(next) {
+<!-- 				 -->      // Add the class after the &lt;h1&gt; hide completes
+<!-- 				 -->      $(this).addClass("important");
+
+<!-- 				 -->      // Process the next animation in the queue
+<!-- 				 -->      next();
+<!-- 				 -->   })
+<!-- 				 -->   .slideDown(1000);
+			</code>
+		</pre>
+		<div id="outerDiv">
+			<p id="queueP">The queue length is: <span></span></p>
+			<div id="queue"></div>
+		</div>
+	</section>
+
+	<section id="animate">
+			<h2>The animate() Method</h2>
+			<p>The <strong>animate()</strong> method allows us to create animation effects on any numeric CSS property. The only required parameter is a plain object of CSS properties. This object is similar to the one that can be sent to the css() method, except that the range of properties is more restrictive.</p>
+			<p>All animated properties should be animated to a single numeric value, most properties that are non-numeric cannot be animated using basic jQuery functionality.</p>
+			<p>In addition to numeric values, each property can take the strings 'show', 'hide', and 'toggle'. These shortcuts allow for custom hiding and showing animations that take into account the display type of the element. In order to use jQuery's built-in toggle state tracking, the 'toggle' keyword must be consistently given as the value of the property being animated. <a href="https://api.jquery.com/animate/" target="_blank">Read more about the animate() method on the jQuery website</a>.</p>
+			<pre>
+				<code>
+<!-- 				 -->$("img").animate({
+<!-- 				 -->   left: "200px",
+<!-- 				 -->   height: "-=60"
+<!-- 				 -->}, "slow", "linear");
+
+<!-- 				 -->$("img").animate({
+<!-- 				 -->   opacity: 0.1,
+<!-- 				 -->   top: "+=50"
+<!-- 				 -->}, 2000);
+                
+<!-- 				 -->$("img").animate({
+<!-- 				 -->   width: "200px"
+<!-- 				 -->}, function() {
+<!-- 				 -->   $(this).css("border", "2px solid red");
+}<!-- 				 -->);
+				</code>
+			</pre>
+			<div id="animatedImage">
+				<button>Animate the Image</button>
+				<img src="https://assets.codepen.io/1351055/fireworks.png" alt="gold star with green and red lines shooting from it">
+			</div>
+	</section>
+	
+	<section id="create">
+		<h2>Create Your Animation</h2>
+		<p>In this section you will create your own animation for an image (although you can animate other things as well). Refer to the examples in this section and the one below to help you animate your image.</p>
+		
+		<section id="section5" class="subsec">
+			<h3>Create Your Animation</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/lava-lamp-collector.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+		 </section>
+		
+		<section id="section6" class="subsec">
+			<h3>Example Animation</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/nic-cage-is-missed.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+		 </section>
+	</section>
+	
+	<section id="examples">
+		<h2>Past Examples of Custom Animations by 418 Students</h2>
+		
+		<section id="section7" class="subsec">
+			<h3>Student Example 1</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/place-cage.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+		</section>
+		
+		<section id="section8" class="subsec">
+			<h3>Student Example 2</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/picolas-cage.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+	  </section>
+		
+		<section id="section9" class="subsec">
+			<h3>Student Example 3</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/my-national-treasure.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+		</section>
+
+		<section id="section10" class="subsec">
+			<h3>Student Example 4</h3>
+			<button class="spanAll">Animate!</button>
+			<div class="height">
+			  <img src="https://robohash.org/you-dont-say.png?size=300x300&bgset=bg2" alt="generated robot placeholder">
+			</div>
+		</section>
+	</section>
+</main>
+
+<footer>
+	<p>Copyright &copy; <span>2022</span> Prof. Barnett GIT418</p>
+</footer>
+</body>
+</html>
